@@ -214,14 +214,16 @@ async def predecir_precio(
        RMSE general obtenido por el modelo usando Cross Validation"""
     
     # Cargamos el modelo
-    #with open('lgbm_regressor_model.joblib', 'rb') as modelo:
-    #    modelo_lgbm = pickle.load(modelo)
-    modelo_lgbm = joblib.load('lgbm_regressor_model.joblib')
+    with open('lgbm_regressor_model.joblib', 'rb') as modelo:
+        modelo_lgbm = pd.read_pickle(modelo)
+    
+    #modelo_lgbm = joblib.load('lgbm_regressor_model.joblib')
 
     # Cargamos tabla vacía para predicción
-    #with open('x_prediccion.pkl', 'rb') as x_prediccion:
-    #    x_pred = pickle.load(x_prediccion)
-    x_pred = joblib.load('x_prediccion.joblib')
+    with open('x_prediccion.pkl', 'rb') as x_prediccion:
+        x_pred = pd.read_pickle(x_prediccion)
+    
+    #x_pred = joblib.load('x_prediccion.joblib')
 
     # Diccionario con publishers, ya que están separados
     # en categorías de 0 a 5 segun pupularidad
