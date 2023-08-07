@@ -5,6 +5,7 @@ import pickle
 from starlette.responses import RedirectResponse
 from sklearn.metrics import mean_squared_error
 import joblib
+#import msgpack
 
 
 # C:\Users\cristian_torres\Desktop\HENRY\proyecto_individual_1\venv/Scripts/Activate.ps1
@@ -213,14 +214,15 @@ async def predecir_precio(
        RMSE general obtenido por el modelo usando Cross Validation"""
     
     # Cargamos el modelo
-    with open('lgbm_regressor_model.pkl', 'rb') as modelo:
-        modelo_lgbm = pickle.load(modelo)
+    #with open('lgbm_regressor_model.pkl', 'rb') as modelo:
+    #    modelo_lgbm = pickle.load(modelo)
     modelo_lgbm = joblib.load('lgbm_regressor_model.pkl')
     
     # Cargamos tabla vacía para predicción
     #with open('x_prediccion.pkl', 'rb') as x_prediccion:
     #    x_pred = pickle.load(x_prediccion)
     x_pred = joblib.load('x_prediccion.pkl')
+
 
     # Diccionario con publishers, ya que están separados
     # en categorías de 0 a 5 segun pupularidad
@@ -230,8 +232,8 @@ async def predecir_precio(
 
     # Diccionario con developers, ya que están separados
     # en categorías de 0 a 5 segun pupularidad
-    with open('dict_developers.pkl', 'rb') as dict_dev:
-        dict_developers = pickle.load(dict_dev)
+    #with open('dict_developers.pkl', 'rb') as dict_dev:
+    #    dict_developers = pickle.load(dict_dev)
     dict_developers = joblib.load('dict_developers.pkl')
 
 
