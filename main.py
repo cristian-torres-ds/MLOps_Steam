@@ -5,7 +5,7 @@ import pickle
 from starlette.responses import RedirectResponse
 from sklearn.metrics import mean_squared_error
 import joblib
-#import msgpack
+import msgpack
 
 
 # C:\Users\cristian_torres\Desktop\HENRY\proyecto_individual_1\venv/Scripts/Activate.ps1
@@ -214,28 +214,30 @@ async def predecir_precio(
        RMSE general obtenido por el modelo usando Cross Validation"""
     
     # Cargamos el modelo
-    #with open('lgbm_regressor_model.pkl', 'rb') as modelo:
+    #with open('lgbm_regressor_model.joblib', 'rb') as modelo:
     #    modelo_lgbm = pickle.load(modelo)
-    modelo_lgbm = joblib.load('lgbm_regressor_model.pkl')
-    
+    modelo_lgbm = joblib.load('lgbm_regressor_model.joblib')
+
     # Cargamos tabla vacía para predicción
     #with open('x_prediccion.pkl', 'rb') as x_prediccion:
     #    x_pred = pickle.load(x_prediccion)
-    x_pred = joblib.load('x_prediccion.pkl')
-
+    x_pred = joblib.load('x_prediccion.joblib')
 
     # Diccionario con publishers, ya que están separados
     # en categorías de 0 a 5 segun pupularidad
-    # with open('dict_publishers.pkl', 'rb') as dict_pub:
+    #with open('dict_publishers.pkl', 'rb') as dict_pub:
     #    dict_publishers = pickle.load(dict_pub)
-    dict_publishers = joblib.load('dict_publishers.pkl')
+    with open('dict_publishers.msgpack', 'rb') as dict_pub:
+        packed_data = dict_pub.read()
+        dict_publishers = msgpack.unpackb(packed_data, raw=False)
 
     # Diccionario con developers, ya que están separados
     # en categorías de 0 a 5 segun pupularidad
     #with open('dict_developers.pkl', 'rb') as dict_dev:
     #    dict_developers = pickle.load(dict_dev)
-    dict_developers = joblib.load('dict_developers.pkl')
-
+    with open('dict_developers.msgpack', 'rb') as dict_dev:
+        packed_data = dict_dev.read()
+        dict_developers = msgpack.unpackb(packed_data, raw=False)
 
     # Early_access es True o False
     x_pred['early_access'] = early_access
