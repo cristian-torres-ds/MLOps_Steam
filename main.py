@@ -2,6 +2,7 @@ from fastapi import FastAPI, Query
 import pandas as pd
 import numpy as np
 import pickle
+from starlette.responses import RedirectResponse
 from sklearn.metrics import mean_squared_error
 
 
@@ -14,14 +15,14 @@ from sklearn.metrics import mean_squared_error
 
 # Título y descripción de la API
 app = FastAPI(title='PROYECTO INDIVIDUAL Nº1 - Machine Learning Operations (MLOps) - Cristian Gabriel Torres DataFT13',
-              description='API de datos y predicción de precios de videojuegos')
+              description='API de datos y predicción de precios de Video Juegos')
 
 
 
-# Función para reconocer el servidor local
+# Función para redireccionar a /docs
 @app.get('/')
-async def index():
-    return {'Hola! Bienvenido a la API de recomedación. Por favor dirigite a /docs'}
+def redirect_to_docs():
+    return RedirectResponse(url='/docs')
 
 
 # Dataset para búsquedas.
