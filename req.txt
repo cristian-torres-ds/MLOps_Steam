@@ -6,7 +6,7 @@ uvicorn
 lightgbm
 
 
-
+1.3.5
 
 
 
