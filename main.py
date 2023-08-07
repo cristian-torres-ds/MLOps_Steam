@@ -23,10 +23,6 @@ app = FastAPI(title='PROYECTO INDIVIDUAL Nº1 - Machine Learning Operations (MLO
 async def index():
     return {'Hola! Bienvenido a la API de recomedación. Por favor dirigite a /docs'}
 
-@app.get('/about/')
-async def about():
-    return {'PROYECTO INDIVIDUAL Nº1 -Machine Learning Operations (MLOps)'}
-
 
 # Dataset para búsquedas.
 df_search = pd.read_json('data_search.json')
