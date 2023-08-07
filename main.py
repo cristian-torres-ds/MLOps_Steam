@@ -4,6 +4,7 @@ import numpy as np
 import pickle
 from starlette.responses import RedirectResponse
 from sklearn.metrics import mean_squared_error
+import joblib
 
 
 # C:\Users\cristian_torres\Desktop\HENRY\proyecto_individual_1\venv/Scripts/Activate.ps1
@@ -214,20 +215,24 @@ async def predecir_precio(
     # Cargamos el modelo
     with open('lgbm_regressor_model.pkl', 'rb') as modelo:
         modelo_lgbm = pickle.load(modelo)
+    modelo_lgbm = joblib.load('lgbm_regressor_model.pkl')
     
     # Cargamos tabla vacía para predicción
-    with open('x_prediccion.pkl', 'rb') as x_prediccion:
-        x_pred = pickle.load(x_prediccion)
+    #with open('x_prediccion.pkl', 'rb') as x_prediccion:
+    #    x_pred = pickle.load(x_prediccion)
+    x_pred = joblib.load('x_prediccion.pkl')
 
     # Diccionario con publishers, ya que están separados
     # en categorías de 0 a 5 segun pupularidad
-    with open('dict_publishers.pkl', 'rb') as dict_pub:
-        dict_publishers = pickle.load(dict_pub)
+    # with open('dict_publishers.pkl', 'rb') as dict_pub:
+    #    dict_publishers = pickle.load(dict_pub)
+    dict_publishers = joblib.load('dict_publishers.pkl')
 
     # Diccionario con developers, ya que están separados
     # en categorías de 0 a 5 segun pupularidad
     with open('dict_developers.pkl', 'rb') as dict_dev:
         dict_developers = pickle.load(dict_dev)
+    dict_developers = joblib.load('dict_developers.pkl')
 
 
     # Early_access es True o False
