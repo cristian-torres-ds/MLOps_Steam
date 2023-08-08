@@ -7,13 +7,9 @@ from sklearn.metrics import mean_squared_error
 import joblib
 import msgpack
 
-
 # C:\Users\cristian_torres\Desktop\HENRY\proyecto_individual_1\venv/Scripts/Activate.ps1
-# para correr la app
-# uvicorn main:app --reload
+# para correr la app: uvicorn main:app --reload
 
-# para parar
-# ctrl + c
 
 # Título y descripción de la API
 app = FastAPI(title='PROYECTO INDIVIDUAL Nº1 - Machine Learning Operations (MLOps) - Cristian Gabriel Torres DataFT13',
@@ -214,7 +210,7 @@ async def predecir_precio(
        RMSE general obtenido por el modelo usando Cross Validation"""
     
     # Cargamos el modelo
-    with open('lgbm_regressor_model.joblib', 'rb') as modelo:
+    with open('lgbm_regressor_model.pkl', 'rb') as modelo:
         modelo_lgbm = pd.read_pickle(modelo)
     
     #modelo_lgbm = joblib.load('lgbm_regressor_model.joblib')
@@ -329,7 +325,7 @@ async def predecir_precio(
     # un valor con forma de array, aunque no sea lo más prolijo.
 
     if precio_real == 0:
-        rmse = f"RMSE del modelo: 8.144" # MODIFICARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+        rmse = f"RMSE del modelo aplicando Cross Validation: 8.144"
         pred_str = f"Precio predicho: ${round(prediccion[0], 2)}"
         return {'prediccion': pred_str,
                 'RMSE' : rmse}
