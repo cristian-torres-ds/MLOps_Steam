@@ -210,7 +210,7 @@ async def predecir_precio(
        RMSE general obtenido por el modelo usando Cross Validation"""
     
     # Cargamos el modelo
-    with open('lgbm_regressor_model.pkl', 'rb') as modelo:
+    with open('lgbm_regressor_model.joblib', 'rb') as modelo:
         modelo_lgbm = pd.read_pickle(modelo)
     
     #modelo_lgbm = joblib.load('lgbm_regressor_model.joblib')
